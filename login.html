@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login-Signup</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family">
+    <!--fa class styles defined here-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="login.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script defer src="login.js"></script>
+</head>
+
+<body>
+    <header>
+        <a href="https://github.com/ever4Ever11/cop4331_small_project">
+        <i id="git-icon" class="fa fa-github" aria-hidden="true"></i>
+        </a>
+    </header>
+
+    <main>
+    <div id="container" class="noflip">
+
+        <div class="login front">
+            <h1>Contact Manager</h1>
+            <div>
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <input type="text"
+                       placeholder="Username"
+                       id="loginUsernameInput"
+                       minlength=5
+                       pattern="\w+"
+                       maxlength=25
+                       required />
+            </div>
+            <div>
+                <i class="fa fa-lock" aria-hidden="true"></i>
+                <input type="password"
+                       placeholder="Password"
+                       id="loginPasswordInput"
+                       minlength=8
+                       pattern="[A-Za-z0-9!@#$%^&*]+"
+                       maxlength=25
+                       required />
+            </div>
+            <button type="button" onclick="if(this.form.reportValidity()){login()}">Login</button>
+            <div class="links">
+                <a href="#" class="toggler">Don't have and account?</a>
+            </div>
+        </div>
+
+        <div class="register back">
+            <div>
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <input type="text" 
+                       placeholder="Username"
+                       id="registerUsernameInput"
+                       minlength=5
+                       pattern="\w+"
+                       maxlength=25
+                       required />
+            </div>
+            <div>
+                <i class="fa fa-address-card" aria-hidden="true"></i>
+                <input type="text" 
+                       placeholder="First Name"
+                       id="registerFirstnameInput"
+                       pattern="[A-Za-z \-]+"
+                       maxlength=25
+                       required />
+            </div>
+            <div>
+                <i class="fa fa-address-card" aria-hidden="true"></i>
+                <input type="text"
+                       placeholder="Last Name"
+                       id="registerLastnameInput"
+                       pattern="[A-Za-z \-]+"
+                       maxlength=25
+                       required />
+            </div>
+            <div>
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <input type="email" 
+                       placeholder="Email"
+                       id="registerEmailInput"
+                       minlength=5
+                       pattern="\w+"
+                       maxlength=25
+                       required />
+            </div>
+            <div>
+                <i class="fa fa-lock" aria-hidden="true"></i>
+                <input type="password" 
+                       placeholder="Password"
+                       type="password"
+                       id="registerPasswordInput"
+                       minlength=8
+                       pattern="[A-Za-z0-9!@#$%^&*]+"
+                       maxlength=25
+                       required />
+            </div>
+            <button type="button" onclick="if(this.form.reportValidity()){register()}">Register</button>
+            <div class="links">
+                <a href="#" class="toggler">Login</a>
+            </div>
+        </div>
+    </div>
+    </main>
+
+    <footer>
+        COP4331 - Spring2025 - team28
+    </footer>
+</body>
+</html>

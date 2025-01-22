@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login-Signup</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family">
+    <!--fa class styles defined here-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="dashboard.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script defer src="dashboard.js"></script>
+</head>
+
+<body>
+    <header>
+        <div id="Welcome-Username">
+            <p>Welcome, <span id="username">Username</span></p>
+        </div>
+        <div id="Logout">
+            <button type="button"  onclick="logout();">Logout</button>
+        </div>
+    </header>
+
+    <div class="snow" aria-hidden="true">
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❆</div>
+      </div>
+    <div class="dashboard-container">
+        <div class="buttons">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            <input class="search-bar" type="text" id="search-input" placeholder=" search your contacts...">
+            <button class="button" id="search-btn" onclick="searchContact();">Search</button>
+            <button class="button" id="add-overlay-btn">Add</button>
+        </div>
+        <!--Display Contacts-->
+        <div class="contacts-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="contacts-table-tbody">
+                    <!--Display all the contacts-->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!--add contact-->
+    <div class="overlay" id="add-overlay">
+        <div class="add contact-container">
+            <form class="add-contact-form">
+                <p>Add Contact</p>
+                <label for="FirstName">First Name:</label>
+                <input type="text" id="add-firstName" required />
+
+                <label for="LastName">Last Name:</label>
+                <input type="text" id="add-lastName" required />
+
+                <label for="Email">Email:</label>
+                <input type="email" id="add-email" required />
+
+                <label for="Phone">Phone:</label>
+                <input type="tel" id="add-phone" required />
+
+                <button class="button" id="add-button" onclick="addContact();">Add</button>
+            </form>
+                <div class="bottom-text">
+                    <a href="#" id="add-cancel">Cancel</a>
+                </div>
+        </div>
+    </div>
+
+    <!--edit contact-->
+    <div class="overlay" id="edit-overlay">
+        <div class="edit contact-container">
+            <form class="edit-contact-form">
+                <p>Edit Contact</p>
+                <label for="firstName">First name:</label>
+                <input type="text" id="edit-firstName" required />
+
+                <label for="lastName">Last name:</label>
+                <input type="text" id="edit-lastName" required />
+
+                <label for="email">Email:</label>
+                <input type="email" id="edit-email" required />
+
+                <label for="phone">Phone:</label>
+                <input type="tel" id="edit-phone" required />
+
+                <button class="button" id="confirm-edit" onclick="updateContact();">Save</button>
+            </form>
+            <div class="bottom-text">
+                <a href="#" id="edit-cancel">Cancel</a>
+            </div>
+        </div>
+    </div>
+   
+    <!--delete contact-->
+    <div class="overlay" id="delete-overlay">
+       <div class="delete contact-container">
+            <p>Are You Sure You Want to Delete?</p>
+            <!--Delete-->
+            <form >
+                <button class="button" id="confirm-delete">Delete</button>
+            </form>
+            <div class="bottom-text">
+                <a href="#" id="delete-cancel">Cancel</a>
+            </div>
+       </div> 
+    </div>
+
+</body>
+</html>

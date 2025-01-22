@@ -9,7 +9,7 @@ function login() {
     let password = document.getElementById("loginPasswordInput").value;
     try {
         let payload = JSON.stringify({
-            username: username,
+            login: username,
             password: password
         });
         let xhr = new XMLHttpRequest();
@@ -38,7 +38,7 @@ function register() {
     let lastname = document.getElementById("registerLastnameInput").value;
     try {
         let payload = JSON.stringify({
-            username: username,
+            login: username,
             password: password,
             firstname: firstname,
             lastname: lastname,

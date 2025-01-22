@@ -9,7 +9,7 @@ $result = $db->execute_query(
     "SELECT *
      FROM Users
      WHERE (Login=?)",
-    [$args["username"]]
+    [$args["login"]]
 );
 
 if (mysqli_num_rows($result) != 0) {
@@ -21,7 +21,7 @@ if (mysqli_num_rows($result) != 0) {
 $db->execute_query(
     "INSERT INTO Users (Login, Password, FirstName, LastName)
      VALUES (?, ?, ?, ?)",
-    [$args["username"], $args["password"], $args["firstname"], $args["lastname"]]
+    [$args["login"], $args["password"], $args["firstname"], $args["lastname"]]
 );
 
 http_response_code(200);

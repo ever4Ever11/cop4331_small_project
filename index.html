@@ -22,9 +22,9 @@
     </header>
 
     <main>
-    <div id="container" class="noflip">
+    <div class="noflip" id="noflip-container" >
 
-        <div class="login front">
+        <form class="login front">
             <h1>Contact Manager</h1>
             <div>
                 <i class="fa fa-user" aria-hidden="true"></i>
@@ -50,9 +50,9 @@
             <div class="links">
                 <a href="#" class="toggler">Don't have and account?</a>
             </div>
-        </div>
+        </form>
 
-        <div class="register back">
+        <form class="register back">
             <div>
                 <i class="fa fa-user" aria-hidden="true"></i>
                 <input type="text" 
@@ -82,16 +82,6 @@
                        required />
             </div>
             <div>
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-                <input type="email" 
-                       placeholder="Email"
-                       id="registerEmailInput"
-                       minlength=5
-                       pattern="\w+"
-                       maxlength=25
-                       required />
-            </div>
-            <div>
                 <i class="fa fa-lock" aria-hidden="true"></i>
                 <input type="password" 
                        placeholder="Password"
@@ -106,7 +96,7 @@
             <div class="links">
                 <a href="#" class="toggler">Login</a>
             </div>
-        </div>
+        </form>
     </div>
     </main>
 

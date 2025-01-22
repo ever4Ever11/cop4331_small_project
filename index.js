@@ -13,7 +13,7 @@ function login() {
             password: password
         });
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", "api/login.php", true);
+        xhr.open("POST", "LAMPAPI/Login.php", true);
         xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
         xhr.onreadystatechange = function () {
             if (this.readyState != XMLHttpRequest.DONE) {
@@ -36,17 +36,15 @@ function register() {
     let password = document.getElementById("registerPasswordInput").value;
     let firstname = document.getElementById("registerFirstnameInput").value;
     let lastname = document.getElementById("registerLastnameInput").value;
-    let email = document.getElementById("registerEmailInput").value;
     try {
         let payload = JSON.stringify({
             username: username,
             password: password,
             firstname: firstname,
             lastname: lastname,
-            email: email
         });
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", "api/register.php", true);
+        xhr.open("POST", "LAMPAPI/Register.php", true);
         xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
         xhr.onreadystatechange = function () {
             if (this.readyState != XMLHttpRequest.DONE) {

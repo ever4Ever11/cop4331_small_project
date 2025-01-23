@@ -1,4 +1,3 @@
-
 /* Snowflakes Animation */
 .snowflake {
   font-family: Arial;
@@ -63,10 +62,23 @@ body {
     height: 100vh;
     margin: 0;
 }
-
-.dashboard-container {
+.search-container {
+    justify-content: center;
     display: flex;
-    width: 80%;
+    width: 100%;
+    max-width: 1000px;
+    flex-direction: column;
+    margin: 50px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-top: -180px;
+    margin-left: 150px;
+}
+.contacts-container {   
+    margin-top: 25px;   
+    margin-right: 100px;
+    width: 90%;
     max-width: 1000px;
     flex-direction: column;
     justify-content: center;
@@ -75,9 +87,19 @@ body {
     box-sizing: border-box;
     border-radius: 10px;
     border: 2px solid #222;
-
 }
-.dashboard-container p {
+.search-bar {
+    size: 50px;
+    padding: 10px;
+    width: 35%;
+    margin-right: 20px;
+    margin-left: 60px;
+    border: 1px solid #3c5f6c;
+    border-radius: 40px;
+    font-size: 16px;
+}
+
+.contacts-container p {
     margin-bottom: 20px;
 }
 #Welcome-Username{
@@ -97,16 +119,6 @@ body {
     position: relative;
     left: 50px;
     transition: opacity 2s ease-in-out;
-}
-.search-bar {
-    size: 50px;
-    padding: 10px;
-    width: 50%;
-    margin-right: 20px;
-    margin-left: 60px;
-    border: 1px solid #3c5f6c;
-    border-radius: 4px;
-    font-size: 16px;
 }
 button {
     outline: none;
@@ -157,7 +169,7 @@ button:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: black;
     justify-content: center;
     align-items: center;
     z-index: 1000;

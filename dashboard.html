@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login-Signup</title>
+    <title>Contacts-Dashboard</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family">
     <!--fa class styles defined here-->
@@ -35,14 +35,16 @@
         <div class="snowflake">❆</div>
         <div class="snowflake">❆</div>
         <div class="snowflake">❆</div>
-      </div>
-    <div class="dashboard-container">
-        <div class="buttons">
-            <i class="fa fa-search" aria-hidden="true"></i>
-            <input class="search-bar" type="text" id="search-input" placeholder=" search your contacts...">
-            <button class="button" id="search-btn" onclick="searchContact();">Search</button>
-            <button class="button" id="add-overlay-btn">Add</button>
-        </div>
+    </div>
+    
+    <div class="search-container">
+      <div class="buttons">
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <input class="search-bar" type="text" id="search-input" placeholder=" search your contacts...">
+        <button class="button" id="search-btn" onclick="searchContact();">Search</button>
+        <button class="button" id="add-overlay-btn">Add</button>
+     </div>
+    <div class="contacts-container">
         <!--Display Contacts-->
         <div class="contacts-table">
             <table>

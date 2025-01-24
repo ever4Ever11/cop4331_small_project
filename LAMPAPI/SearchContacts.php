@@ -2,7 +2,7 @@
 
 	$inData = getRequestInfo();
 	
-	$searchResults = "";
+	$searchResults = [];
 	$searchCount = 0;
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
@@ -12,21 +12,22 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("select Name from Colors where Name like ? and UserID=?");
-		$colorName = "%" . $inData["search"] . "%";
-		$stmt->bind_param("ss", $colorName, $inData["userId"]);
+		$stmt = $conn->prepare("SELECT FirstName, LastName, Phone, Email FROM Contacts WHERE CONCAT_WS(' ', FirstName, LastName) LIKE ? AND UserID=?");
+		$contactName = "%" . $inData["search"] . "%";
+		$stmt->bind_param("ss", $contactName, $inData["userId"]);
 		$stmt->execute();
 		
 		$result = $stmt->get_result();
 		
 		while($row = $result->fetch_assoc())
 		{
-			if( $searchCount > 0 )
-			{
-				$searchResults .= ",";
-			}
 			$searchCount++;
-			$searchResults .= '"' . $row["Name"] . '"';
+			$searchResults[] = [
+				"firstName" => $row["FirstName"],
+				"lastName" => $row["LastName"],
+				"phone" => $row["Phone"],
+				"email" => $row["Email"]
+			];
 		}
 		
 		if( $searchCount == 0 )
@@ -35,7 +36,7 @@
 		}
 		else
 		{
-			returnWithInfo( $searchResults );
+			returnWithInfo( json_encode($searchResults) );
 		}
 		
 		$stmt->close();
@@ -55,13 +56,13 @@
 	
 	function returnWithError( $err )
 	{
-		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+		$retValue = '{"results":{"id":0,"firstName":"","lastName":"","phone":"","email":""},"error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
 	function returnWithInfo( $searchResults )
 	{
-		$retValue = '{"results":[' . $searchResults . '],"error":""}';
+		$retValue = '{"results":' . $searchResults . ',"error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
 	

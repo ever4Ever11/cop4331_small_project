@@ -63,6 +63,8 @@ body {
     margin: 0;
 }
 .search-container {
+    position: absolute;         /* Temporary fix for table positioning */
+    top: 444.5px;               /* Temporary fix for table positioning */
     justify-content: center;
     display: flex;
     width: 100%;

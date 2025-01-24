@@ -33,6 +33,56 @@ function getCookie(name) {
     return "";
 }
 
+function searchContact() {
+    let search = document.getElementById("search-input").value;
+    
+    try {
+        payload = JSON.stringify({
+            search: search,
+            userId: getCookie("userId")
+        });
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "LAMPAPI/SearchContacts.php", true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        xhr.onreadystatechange = function() {
+            if (this.readyState != XMLHttpRequest.DONE) {
+                return;
+            } else if (this.status == 200) {
+                displayContacts(JSON.parse(this.response).results);
+            } else {
+                window.alert(`Error: (${this.status}) ${this.statusText}`);
+            }
+        };
+        xhr.send(payload);
+    } catch (e) {
+        window.alert(`Error: ${e.message}`);
+    }
+}
+
+function displayContacts(contactList) {
+    let table = document.getElementById("contacts-table-tbody");
+    table.innerHTML = "";
+    for (let i = 0; i < contactList.length; i++) {
+        let contact = contactList[i];
+        let row = document.createElement("tr");
+
+        let firstName = document.createElement("td");
+        firstName.innerHTML = contact.firstName;
+
+        let lastName = document.createElement("td");
+        lastName.innerHTML = contact.lastName;
+
+        let phone = document.createElement("td");
+        phone.innerHTML = contact.phone;
+
+        let email = document.createElement("td");
+        email.innerHTML = contact.email;
+
+        row.append(firstName, lastName, phone, email);
+        table.append(row);
+    }
+}
+
 function addContact() {
     let firstName = document.getElementById("add-firstName").value;
     let lastName = document.getElementById("add-lastName").value;
@@ -50,7 +100,7 @@ function addContact() {
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "LAMPAPI/AddContact.php", true);
         xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-        xhr.onreadystatechange = function () {
+        xhr.onreadystatechange = function() {
             if (this.readyState != XMLHttpRequest.DONE) {
                 return;
             }

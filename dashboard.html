@@ -20,7 +20,7 @@
             <p>Welcome, <span id="username"></span></p>
         </div>
         <div id="Logout">
-            <button type="button"  onclick="logout();">Logout</button>
+            <button onclick="logout();">Logout</button>
         </div>
     </header>
 
@@ -80,7 +80,7 @@
                 <label for="Phone">Phone:</label>
                 <input type="tel" id="add-phone" required />
 
-                <button class="button" id="add-button" onclick="addContact();">Add</button>
+                <button type="button" class="button" id="add-button" onclick="addContact();">Add</button>
             </form>
                 <div class="bottom-text">
                     <a href="#" id="add-cancel">Cancel</a>
@@ -105,7 +105,7 @@
                 <label for="phone">Phone:</label>
                 <input type="tel" id="edit-phone" required />
 
-                <button class="button" id="confirm-edit" onclick="updateContact();">Save</button>
+                <button type="button" class="button" id="confirm-edit" onclick="updateContact();">Save</button>
             </form>
             <div class="bottom-text">
                 <a href="#" id="edit-cancel">Cancel</a>
@@ -119,7 +119,7 @@
             <p>Are You Sure You Want to Delete?</p>
             <!--Delete-->
             <form >
-                <button class="button" id="confirm-delete">Delete</button>
+                <button type="button" class="button" id="confirm-delete">Delete</button>
             </form>
             <div class="bottom-text">
                 <a href="#" id="delete-cancel">Cancel</a>

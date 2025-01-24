@@ -54,9 +54,8 @@ function addContact() {
             if (this.readyState != XMLHttpRequest.DONE) {
                 return;
             }
-            console.log(`Status: ${this.status}`);
             if (this.status == 200) {
-                console.log("Success");
+                document.getElementById("add-overlay").classList.remove("active");
                 window.alert(`${firstName} ${lastName} successfully added to contacts!`);
             } else {
                 window.alert(`Error: (${this.status}) ${this.statusText}`);

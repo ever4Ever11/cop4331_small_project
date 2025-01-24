@@ -211,7 +211,6 @@ button:hover {
 .contact-container input[type="email"],
 .contact-container input[type="tel"],
 .contact-container input[type="text"],
-.contact-container button[type="button"],
 .contact-container input[type="submit"] {
     width: 100%;
     padding: 10px;

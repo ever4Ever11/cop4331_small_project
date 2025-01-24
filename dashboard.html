@@ -69,37 +69,37 @@
     <!--add contact-->
     <div class="overlay" id="add-overlay">
         <div class="add contact-container">
-            <form class="add-contact-form">
+            <form id="add-contact-form">
                 <div class="overlay-icon">
                     <i class="fa fa-times" id="add-cancel" aria-hidden="true"></i>
                 </div>
 
                 <div class="contact-input">
-                  <input type="text" required>
+                  <input type="text" id="add-firstName" required>
                   <span class="highlight"></span>
                   <span class="bar"></span>
-                  <label>First Name</label>
+                  <label for="add-firstName">First Name</label>
                 </div>
 
                 <div class="contact-input">
-                  <input type="text" required>
+                  <input type="text" id="add-lastName" required>
                   <span class="highlight"></span>
                   <span class="bar"></span>
-                  <label>Last Name</label>
+                  <label for="add-lastName">Last Name</label>
                 </div>
 
                  <div class="contact-input">
-                  <input type="text" required>
+                  <input type="text" id="add-phone" required>
                   <span class="highlight"></span>
                   <span class="bar"></span>
-                  <label>Phone</label>
+                  <label for="add-phone">Phone</label>
                 </div>
 
                  <div class="contact-input">
-                  <input type="text" required>
+                  <input type="text" id="add-email" required>
                   <span class="highlight"></span>
                   <span class="bar"></span>
-                  <label>Email</label>
+                  <label for="add-email">Email</label>
                 </div>
                 <button class="button" id="add-button" onclick="addContact();">Add</button>
             </form>
@@ -112,7 +112,7 @@
             <div class="overlay-icon">
                 <i class="fa fa-times" id="edit-cancel" aria-hidden="true"></i>
             </div>
-            <form class="edit-contact-form">
+            <form id="edit-contact-form">
                 <label for="firstName">First name:</label>
                 <input type="text" id="edit-firstName" required />
 

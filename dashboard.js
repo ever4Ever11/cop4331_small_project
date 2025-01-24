@@ -6,6 +6,10 @@ document.getElementById("add-cancel").addEventListener("click", hidefunction);
 document.getElementById("edit-cancel").addEventListener("click", hidefunction);
 document.getElementById("delete-cancel").addEventListener("click", hidefunction);
 
+document.getElementById("add-contact-form").addEventListener("submit", (event) => {
+    event.preventDefault();
+});
+
 document.getElementById("add-overlay-btn").addEventListener("click", () => {
     document.getElementById("add-overlay").classList.add("active");
 });
@@ -86,15 +90,15 @@ function displayContacts(contactList) {
 function addContact() {
     let firstName = document.getElementById("add-firstName").value;
     let lastName = document.getElementById("add-lastName").value;
-    let email = document.getElementById("add-email").value;
     let phone = document.getElementById("add-phone").value;
+    let email = document.getElementById("add-email").value;
 
     try {
         let payload = JSON.stringify({
             firstName: firstName,
             lastName: lastName,
-            email: email,
             phone: phone,
+            email: email,
             userId: getCookie("userId")
         });
         let xhr = new XMLHttpRequest();

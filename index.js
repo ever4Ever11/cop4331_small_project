@@ -20,6 +20,9 @@ function login() {
                 return;
             }
             if (this.status == 200) {
+                let response = JSON.parse(this.response);
+                document.cookie = `userId = ${response.id}`;
+                document.cookie = `firstName = ${response.firstName}`;
                 window.location.href = "dashboard.html";
             } else if (this.status == 401) {
                 window.alert("Error: Authentification failed! Correct your username and password.");

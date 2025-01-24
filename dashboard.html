@@ -20,7 +20,7 @@
             <p>Welcome, <span id="username"></span></p>
         </div>
         <div id="Logout">
-            <button onclick="logout();">Logout</button>
+            <button type="button"  onclick="logout();">Logout</button>
         </div>
     </header>
 
@@ -36,23 +36,26 @@
         <div class="snowflake">❆</div>
         <div class="snowflake">❆</div>
     </div>
-    
+
     <div class="search-container">
       <div class="buttons">
-        <i class="fa fa-search" aria-hidden="true"></i>
+        <i class="fa fa-search" id="search-icon" aria-hidden="true"></i>
         <input class="search-bar" type="text" id="search-input" placeholder=" search your contacts...">
         <button class="button" id="search-btn" onclick="searchContact();">Search</button>
         <button class="button" id="add-overlay-btn">Add</button>
-     </div>
+      </div>
+    </div>
+
     <div class="contacts-container">
         <!--Display Contacts-->
         <div class="contacts-table">
             <table>
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
                         <th>Phone</th>
+                        <th>Email</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -62,69 +65,86 @@
             </table>
         </div>
     </div>
-    
+
     <!--add contact-->
     <div class="overlay" id="add-overlay">
         <div class="add contact-container">
             <form class="add-contact-form">
-                <p>Add Contact</p>
-                <label for="FirstName">First Name:</label>
-                <input type="text" id="add-firstName" required />
-
-                <label for="LastName">Last Name:</label>
-                <input type="text" id="add-lastName" required />
-
-                <label for="Email">Email:</label>
-                <input type="email" id="add-email" required />
-
-                <label for="Phone">Phone:</label>
-                <input type="tel" id="add-phone" required />
-
-                <button type="button" class="button" id="add-button" onclick="addContact();">Add</button>
-            </form>
-                <div class="bottom-text">
-                    <a href="#" id="add-cancel">Cancel</a>
+                <div class="overlay-icon">
+                    <i class="fa fa-times" id="add-cancel" aria-hidden="true"></i>
                 </div>
+
+                <div class="contact-input">
+                  <input type="text" required>
+                  <span class="highlight"></span>
+                  <span class="bar"></span>
+                  <label>First Name</label>
+                </div>
+
+                <div class="contact-input">
+                  <input type="text" required>
+                  <span class="highlight"></span>
+                  <span class="bar"></span>
+                  <label>Last Name</label>
+                </div>
+
+                 <div class="contact-input">
+                  <input type="text" required>
+                  <span class="highlight"></span>
+                  <span class="bar"></span>
+                  <label>Phone</label>
+                </div>
+
+                 <div class="contact-input">
+                  <input type="text" required>
+                  <span class="highlight"></span>
+                  <span class="bar"></span>
+                  <label>Email</label>
+                </div>
+                <button class="button" id="add-button" onclick="addContact();">Add</button>
+            </form>
         </div>
     </div>
 
-    <!--edit contact-->
+    <!--edit contact haven't finished yet -->
     <div class="overlay" id="edit-overlay">
         <div class="edit contact-container">
+            <div class="overlay-icon">
+                <i class="fa fa-times" id="edit-cancel" aria-hidden="true"></i>
+            </div>
             <form class="edit-contact-form">
-                <p>Edit Contact</p>
                 <label for="firstName">First name:</label>
                 <input type="text" id="edit-firstName" required />
 
                 <label for="lastName">Last name:</label>
                 <input type="text" id="edit-lastName" required />
 
-                <label for="email">Email:</label>
-                <input type="email" id="edit-email" required />
-
                 <label for="phone">Phone:</label>
                 <input type="tel" id="edit-phone" required />
 
-                <button type="button" class="button" id="confirm-edit" onclick="updateContact();">Save</button>
+                <label for="email">Email:</label>
+                <input type="email" id="edit-email" required />
+
+                <button class="button" id="confirm-edit" onclick="updateContact();">Save</button>
             </form>
             <div class="bottom-text">
                 <a href="#" id="edit-cancel">Cancel</a>
             </div>
         </div>
     </div>
-   
-    <!--delete contact-->
+
+    <!--delete contact haven't finished yet-->
     <div class="overlay" id="delete-overlay">
-       <div class="delete contact-container">
+        <div class="delete contact-container">
+            <div class="overlay-icon">
+                <i class="fa fa-times" id="delete-cancel" aria-hidden="true"></i>
+            </div>
             <p>Are You Sure You Want to Delete?</p>
             <!--Delete-->
             <form >
-                <button type="button" class="button" id="confirm-delete">Delete</button>
+                <button class="button" id="confirm-delete" onclick="updateContact()">Delete</button>
             </form>
-            <div class="bottom-text">
-                <a href="#" id="delete-cancel">Cancel</a>
-            </div>
-       </div> 
+        </div>
     </div>
 
 </body>

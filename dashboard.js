@@ -37,6 +37,30 @@ function getCookie(name) {
     return "";
 }
 
+function populateContacts() {
+    try {
+        payload = JSON.stringify({
+            search: '',
+            userId: getCookie("userId")
+        });
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "LAMPAPI/SearchContacts.php", true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        xhr.onreadystatechange = function() {
+            if (this.readyState != XMLHttpRequest.DONE) {
+                return;
+            } else if (this.status == 200) {
+                displayContacts(JSON.parse(this.response).results);
+            } else {
+                window.alert(`Error: (${this.status}) ${this.statusText}`);
+            }
+        };
+        xhr.send(payload);
+    } catch (e) {
+        window.alert(`Error: ${e.message}`);
+    }
+}
+
 function searchContact() {
     let search = document.getElementById("search-input").value;
     

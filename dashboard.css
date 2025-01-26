@@ -150,8 +150,19 @@ button:hover {
     background: #fcfcfc;
     color: #3c5f6c;
 }
-#add-button{
+#add-button, #confirm-edit, #confirm-delete{
     margin-left: 100px;
+}
+#edit-button, #delete-button{
+    width:20px;
+    height: 20px;
+    background-color:#eef4ed;
+    border:none;
+}
+#edit-icon, #delete-icon{
+   font-size: 20px;
+   color:#3c5f6c;
+
 }
 .contacts-table {
     margin-top: 10px;

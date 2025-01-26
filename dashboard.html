@@ -106,34 +106,51 @@
         </div>
     </div>
 
-    <!--edit contact haven't finished yet -->
+    <!--edit contact-->
     <div class="overlay" id="edit-overlay">
         <div class="edit contact-container">
-            <div class="overlay-icon">
-                <i class="fa fa-times" id="edit-cancel" aria-hidden="true"></i>
-            </div>
             <form id="edit-contact-form">
-                <label for="firstName">First name:</label>
+                <div class="overlay-icon">
+                    <i class="fa fa-times" id="edit-cancel" aria-hidden="true"></i>
+                </div>
+                
+                <input type="hidden" id="edit-id" />
+                
+                <div class="contact-input">
                 <input type="text" id="edit-firstName" required />
-
-                <label for="lastName">Last name:</label>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label for="firstName">First name:</label>
+                </div>
+                
+                <div class="contact-input">
                 <input type="text" id="edit-lastName" required />
+                <label for="lastName">Last name:</label>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                </div>
 
-                <label for="phone">Phone:</label>
+                <div class="contact-input">
                 <input type="tel" id="edit-phone" required />
+                <label for="phone">Phone:</label>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                </div>
 
-                <label for="email">Email:</label>
+                <div class="contact-input">
                 <input type="email" id="edit-email" required />
+                <label for="email">Email:</label>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                </div>
 
-                <button class="button" id="confirm-edit" onclick="updateContact();">Save</button>
+                <button class="button" id="confirm-edit" onclick="editContact();">Save</button>
             </form>
-            <div class="bottom-text">
-                <a href="#" id="edit-cancel">Cancel</a>
-            </div>
         </div>
     </div>
+    
 
-    <!--delete contact haven't finished yet-->
+    <!--delete contact-->
     <div class="overlay" id="delete-overlay">
         <div class="delete contact-container">
             <div class="overlay-icon">
@@ -141,8 +158,9 @@
             </div>
             <p>Are You Sure You Want to Delete?</p>
             <!--Delete-->
-            <form >
-                <button class="button" id="confirm-delete" onclick="updateContact()">Delete</button>
+            <form id="delete-contact-form">
+                <input type="hidden" id="delete-id" />
+                <button class="button" id="confirm-delete" onclick="deleteContact()">Delete</button>
             </form>
         </div>
     </div>

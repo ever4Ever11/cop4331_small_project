@@ -12,7 +12,7 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("SELECT FirstName, LastName, Phone, Email FROM Contacts WHERE CONCAT_WS(' ', FirstName, LastName) LIKE ? AND UserID=?");
+		$stmt = $conn->prepare("SELECT ID, FirstName, LastName, Phone, Email FROM Contacts WHERE CONCAT_WS(' ', FirstName, LastName) LIKE ? AND UserID=?");
 		$contactName = "%" . $inData["search"] . "%";
 		$stmt->bind_param("ss", $contactName, $inData["userId"]);
 		$stmt->execute();
@@ -23,6 +23,7 @@
 		{
 			$searchCount++;
 			$searchResults[] = [
+				"id" => $row["ID"],
 				"firstName" => $row["FirstName"],
 				"lastName" => $row["LastName"],
 				"phone" => $row["Phone"],

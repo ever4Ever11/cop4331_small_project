@@ -10,6 +10,14 @@ document.getElementById("add-contact-form").addEventListener("submit", (event) =
     event.preventDefault();
 });
 
+document.getElementById("edit-contact-form").addEventListener("submit", (event) => {
+    event.preventDefault();
+});
+
+document.getElementById("delete-contact-form").addEventListener("submit", (event) => {
+    event.preventDefault();
+});
+
 document.getElementById("add-overlay-btn").addEventListener("click", () => {
     document.getElementById("add-overlay").classList.add("active");
 });
@@ -17,6 +25,7 @@ document.getElementById("add-overlay-btn").addEventListener("click", () => {
 document.getElementById("username").addEventListener("load", () => {
     this.innerHTML = getCookie("firstName");
 });
+
 try {
     document.getElementById("username").innerHTML = getCookie("firstName");
 } catch {};
@@ -106,9 +115,35 @@ function displayContacts(contactList) {
         let email = document.createElement("td");
         email.innerHTML = contact.email;
 
-        row.append(firstName, lastName, phone, email);
+        let actions = document.createElement("td");
+        actions.innerHTML = `
+            <button class="button" id="edit-button" onclick="activateEdit(${contact.id}, '${contact.firstName}', '${contact.lastName}', '${contact.phone}', '${contact.email}')">
+            <i class="fa fa-edit" id="edit-icon" aria-hidden="true"></i>
+            </button>
+            <button class="button" id="delete-button" onclick="activateDelete(${contact.id})">
+            <i class="fa fa-trash" id="delete-icon" aria-hidden="true"></i>
+            </button>
+        `;
+
+        row.append(firstName, lastName, phone, email, actions);
         table.append(row);
     }
+}
+
+function activateEdit(id, firstName, lastName, phone, email) {
+    let overlay = document.getElementById("edit-overlay");
+    overlay.classList.add("active");
+    document.getElementById("edit-id").value = id;
+    document.getElementById("edit-firstName").value = firstName;
+    document.getElementById("edit-lastName").value = lastName;
+    document.getElementById("edit-phone").value = phone;
+    document.getElementById("edit-email").value = email;
+}
+
+function activateDelete(id) {
+    let overlay = document.getElementById("delete-overlay");
+    overlay.classList.add("active");
+    document.getElementById("delete-id").value = id;
 }
 
 function addContact() {
@@ -143,6 +178,22 @@ function addContact() {
     } catch (e) {
         window.alert(`Error: ${e.message}`);
     }
+}
+
+function editContact() {
+    let contactId = document.getElementById("edit-id").value;
+    let firstName = document.getElementById("edit-firstName").value;
+    let lastName = document.getElementById("edit-lastName").value;
+    let phone = document.getElementById("edit-phone").value;
+    let email = document.getElementById("edit-email").value;
+    document.getElementById("edit-overlay").classList.remove("active");
+    window.alert(`Editing contact ${contactId}: ${firstName} ${lastName} ${phone} ${email}`);
+}
+
+function deleteContact() {
+    let contactId = document.getElementById("delete-id").value;
+    document.getElementById("delete-overlay").classList.remove("active");
+    window.alert(`Deleted contact ${contactId}`);
 }
 
 function logout() {

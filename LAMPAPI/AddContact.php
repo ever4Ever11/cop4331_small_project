@@ -4,7 +4,7 @@
 	$firstName = $inData["firstName"];
 	$lastName = $inData["lastName"];
 	$email = $inData["email"];
-	$phone = $inData["phone"];
+	$phone = FormatPhone($inData["phone"]);
 	$userId = $inData["userId"];
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
@@ -39,4 +39,16 @@
 		sendResultInfoAsJson( $retValue );
 	}
 	
+	function FormatPhone($phone){
+		// Remove non-numeric characters
+		$phone = preg_replace('/[^0-9]/', '', $phone);
+
+		// Validate the phone number length
+		if (strlen($phone) != 10) {
+			return "Invalid phone number";
+		}
+
+		// Phone number formatting
+		return substr($phone, 0, 3) . '-' . substr($phone, 3, 3) . '-' . substr($phone, 6);
+	}
 ?>

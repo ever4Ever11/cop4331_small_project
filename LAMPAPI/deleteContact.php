@@ -3,49 +3,58 @@
 $inData = getRequestInfo();
 
 $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
-if( $conn->connect_error )
-{
-	returnWithError( $conn->connect_error );
-}
-else
-{
-	$stmt = $conn->prepare("DELETE FROM Contacts WHERE ID=?");
-	$stmt->bind_param("i", $inData["ID"]);
-	
-	if ($stmt->execute())
-	{
-		returnWithInfo("Contact deleted successfully.");
-	}
-	else
-	{
-		returnWithError("Failed to delete contact.");
-	}
+if ($conn->connect_error) {
+    returnWithError($conn->connect_error);
+} else {
+    
+    $stmt = $conn->prepare("SELECT ID FROM Contacts WHERE ID=?");
+    if ($stmt === false) {
+        returnWithError("Error " . $conn->error);
+    }
 
-	$stmt->close();
-	$conn->close();
-}
+    $stmt->bind_param("i", $inData["ID"]);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-function getRequestInfo()
-{
-	return json_decode(file_get_contents('php://input'), true);
-}
+    if ($result->num_rows > 0) {
+        
+        $stmt = $conn->prepare("DELETE FROM Contacts WHERE ID=?");
+        if ($stmt === false) {
+            returnWithError("Error " . $conn->error);
+        }
 
-function sendResultInfoAsJson( $obj )
-{
-	header('Content-type: application/json');
-	echo $obj;
-}
+        $stmt->bind_param("i", $inData["ID"]);
+        
+        if ($stmt->execute()) {
+            returnWithInfo("Contact deleted successfully.");
+        } else {
+            returnWithError("Failed to delete contact: " . $stmt->error);
+        }
+    } else {
+        returnWithError("Contact not found.");
+    }
 
-function returnWithError( $err )
-{
-	$retValue = '{"error":"' . $err . '"}';
-	sendResultInfoAsJson( $retValue );
+    $stmt->close();
+    $conn->close();
 }
 
-function returnWithInfo( $message )
-{
-	$retValue = '{"message":"' . $message . '","error":""}';
-	sendResultInfoAsJson( $retValue );
+function getRequestInfo() {
+    return json_decode(file_get_contents('php://input'), true);
+}
+
+function sendResultInfoAsJson($obj) {
+    header('Content-type: application/json');
+    echo $obj;
+}
+
+function returnWithError($err) {
+    $retValue = '{"error":"' . $err . '"}';
+    sendResultInfoAsJson($retValue);
+}
+
+function returnWithInfo($message) {
+    $retValue = '{"message":"' . $message . '","error":""}';
+    sendResultInfoAsJson($retValue);
 }
 
 ?>

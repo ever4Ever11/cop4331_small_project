@@ -186,8 +186,33 @@ function editContact() {
     let lastName = document.getElementById("edit-lastName").value;
     let phone = document.getElementById("edit-phone").value;
     let email = document.getElementById("edit-email").value;
-    document.getElementById("edit-overlay").classList.remove("active");
-    window.alert(`Editing contact ${contactId}: ${firstName} ${lastName} ${phone} ${email}`);
+
+    try {
+        let payload = JSON.stringify({
+            ID: id,
+            FirstName: firstname,
+            LastName: lastName,
+            Phone: phone,
+            Email: email
+        });
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "LAMPAPI/editContact.php", true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        xhr.onreadystatechange = function() {
+            if (this.readyState != XMLHttpRequest.DONE) {
+                return;
+            }
+            if (this.status == 200) {
+                document.getElementById("edit-overlay").classList.remove("active");
+                window.alert(`Successfully edited contact ${contactId}: ${firstName} ${lastName} ${phone} ${email}`);
+            } else {
+                window.alert(`Error: (${this.status}) ${this.statusTest}`);
+            }
+        };
+        xhr.send(payload);
+    } catch (e) {
+        window.alert(`Error: ${e.message}`);
+    }
 }
 
 function deleteContact() {

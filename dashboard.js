@@ -122,7 +122,7 @@ function displayContacts(contactList) {
 
         let actions = document.createElement("td");
         actions.innerHTML = `
-            <button class="button" id="edit-button" onclick="activateEdit(${contact.id}, '${contact.firstName}', '${contact.lastName}', '${contact.phone}', '${contact.email}')">
+            <button class="button" id="edit-button" onclick="activateEdit(${contact.id})">
             <i class="fa fa-edit" id="edit-icon" aria-hidden="true"></i>
             </button>
             <button class="button" id="delete-button" onclick="activateDelete(${contact.id})">
@@ -135,14 +135,15 @@ function displayContacts(contactList) {
     }
 }
 
-function activateEdit(id, firstName, lastName, phone, email) {
+function activateEdit(id) {
     let overlay = document.getElementById("edit-overlay");
     overlay.classList.add("active");
     document.getElementById("edit-id").value = id;
-    document.getElementById("edit-firstName").value = firstName;
-    document.getElementById("edit-lastName").value = lastName;
-    document.getElementById("edit-phone").value = phone;
-    document.getElementById("edit-email").value = email;
+    let contact = document.getElementById(`contact-${id}`);
+    document.getElementById("edit-firstName").value = contact.getElementsByClassName("first-name")[0].innerHTML;
+    document.getElementById("edit-lastName").value = contact.getElementsByClassName("last-name")[0].innerHTML;
+    document.getElementById("edit-phone").value = contact.getElementsByClassName("phone")[0].innerHTML;
+    document.getElementById("edit-email").value = contact.getElementsByClassName("email")[0].innerHTML;
 }
 
 function activateDelete(id) {
@@ -173,8 +174,48 @@ function addContact() {
                 return;
             }
             if (this.status == 200) {
+                let contact_id = JSON.parse(this.response).id;
+
+                let table = document.getElementById("contacts-table-tbody");
+
+                let row = document.createElement("tr");
+                row.setAttribute("id", `contact-${contact_id}`);
+
+                let firstNameE = document.createElement("td");
+                firstNameE.innerHTML = firstName;
+                firstNameE.className = "first-name";
+
+                let lastNameE = document.createElement("td");
+                lastNameE.innerHTML = lastName;
+                lastNameE.className = "last-name";
+
+                let phoneE = document.createElement("td");
+                phoneE.innerHTML = phone;
+                phoneE.className = "phone";
+
+                let emailE = document.createElement("td");
+                emailE.innerHTML = email;
+                emailE.className = "email";
+
+                let actions = document.createElement("td");
+                actions.innerHTML = `
+                    <button class="button" id="edit-button" onclick="activateEdit(${contact_id})">
+                    <i class="fa fa-edit" id="edit-icon" aria-hidden="true"></i>
+                    </button>
+                    <button class="button" id="delete-button" onclick="activateDelete(${contact_id})">
+                    <i class="fa fa-trash" id="delete-icon" aria-hidden="true"></i>
+                    </button>
+                `;
+
+                row.appendChild(firstNameE);
+                row.appendChild(lastNameE);
+                row.appendChild(phoneE);
+                row.appendChild(emailE);
+                row.appendChild(actions);
+                table.appendChild(row);
+
                 document.getElementById("add-overlay").classList.remove("active");
-                window.alert(`${firstName} ${lastName} successfully added to contacts!`);
+                window.alert(`${firstName} ${lastName} successfully added to contacts ${contact_id}!`);
             } else {
                 window.alert(`Error: (${this.status}) ${this.statusText}`);
             }

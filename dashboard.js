@@ -53,7 +53,7 @@ function populateContacts() {
             userId: getCookie("userId")
         });
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", "LAMPAPI/SearchContacts.php", true);
+        xhr.open("POST", "LAMPAPI/search-contacts.php", true);
         xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
         xhr.onreadystatechange = function() {
             if (this.readyState != XMLHttpRequest.DONE) {
@@ -79,7 +79,7 @@ function searchContact() {
             userId: getCookie("userId")
         });
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", "LAMPAPI/SearchContacts.php", true);
+        xhr.open("POST", "LAMPAPI/search-contacts.php", true);
         xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
         xhr.onreadystatechange = function() {
             if (this.readyState != XMLHttpRequest.DONE) {
@@ -102,18 +102,23 @@ function displayContacts(contactList) {
     for (let i = 0; i < contactList.length; i++) {
         let contact = contactList[i];
         let row = document.createElement("tr");
+        row.setAttribute("id", `contact-${contact.id}`);
 
         let firstName = document.createElement("td");
         firstName.innerHTML = contact.firstName;
+        firstName.className = "first-name";
 
         let lastName = document.createElement("td");
         lastName.innerHTML = contact.lastName;
+        lastName.className = "last-name";
 
         let phone = document.createElement("td");
         phone.innerHTML = contact.phone;
+        phone.className = "phone";
 
         let email = document.createElement("td");
         email.innerHTML = contact.email;
+        email.className = "email";
 
         let actions = document.createElement("td");
         actions.innerHTML = `
@@ -161,7 +166,7 @@ function addContact() {
             userId: getCookie("userId")
         });
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", "LAMPAPI/AddContact.php", true);
+        xhr.open("POST", "LAMPAPI/add-contact.php", true);
         xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
         xhr.onreadystatechange = function() {
             if (this.readyState != XMLHttpRequest.DONE) {
@@ -189,20 +194,26 @@ function editContact() {
 
     try {
         let payload = JSON.stringify({
-            ID: id,
-            FirstName: firstname,
+            ID: contactId,
+            FirstName: firstName,
             LastName: lastName,
             Phone: phone,
             Email: email
         });
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", "LAMPAPI/editContact.php", true);
+        xhr.open("POST", "LAMPAPI/edit-contact.php", true);
         xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
         xhr.onreadystatechange = function() {
             if (this.readyState != XMLHttpRequest.DONE) {
                 return;
             }
             if (this.status == 200) {
+                let contact = document.getElementById(`contact-${contactId}`);
+                contact.getElementsByClassName("first-name")[0].innerHTML = firstName;
+                contact.getElementsByClassName("last-name")[0].innerHTML = lastName;
+                contact.getElementsByClassName("phone")[0].innerHTML = phone;
+                contact.getElementsByClassName("email")[0].innerHTML = email;
+
                 document.getElementById("edit-overlay").classList.remove("active");
                 window.alert(`Successfully edited contact ${contactId}: ${firstName} ${lastName} ${phone} ${email}`);
             } else {
@@ -217,8 +228,33 @@ function editContact() {
 
 function deleteContact() {
     let contactId = document.getElementById("delete-id").value;
-    document.getElementById("delete-overlay").classList.remove("active");
-    window.alert(`Deleted contact ${contactId}`);
+
+    try {
+        let payload = JSON.stringify({
+            ID: contactId
+        });
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "LAMPAPI/delete-contact.php", true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        xhr.onreadystatechange = function() {
+            if (this.readyState != XMLHttpRequest.DONE) {
+                return;
+            }
+            if (this.status == 200) {
+                let contact = document.getElementById(`contact-${contactId}`);
+                console.log(contact);
+                contact.parentNode.removeChild(contact);
+                console.log(contact);
+                document.getElementById("delete-overlay").classList.remove("active");
+                window.alert(`Deleted contact ${contactId}`);
+            } else {
+                window.alert(`Error: (${this.status}) ${this.statusText}`);
+            }
+        };
+        xhr.send(payload);
+    } catch (e) {
+        window.alert(`Error: ${e.message}`);
+    }
 }
 
 function logout() {

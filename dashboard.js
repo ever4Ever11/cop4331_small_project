@@ -215,7 +215,11 @@ function addContact() {
                 table.appendChild(row);
 
                 document.getElementById("add-overlay").classList.remove("active");
-                window.alert(`${firstName} ${lastName} successfully added to contacts ${contact_id}!`);
+                
+                document.getElementById("add-firstName").value = "";
+                lastName = document.getElementById("add-lastName").value = "";
+                phone = document.getElementById("add-phone").value = "";
+                email = document.getElementById("add-email").value = "";
             } else {
                 window.alert(`Error: (${this.status}) ${this.statusText}`);
             }
@@ -255,8 +259,7 @@ function editContact() {
                 contact.getElementsByClassName("phone")[0].innerHTML = phone;
                 contact.getElementsByClassName("email")[0].innerHTML = email;
 
-                document.getElementById("edit-overlay").classList.remove("active");
-                window.alert(`Successfully edited contact ${contactId}: ${firstName} ${lastName} ${phone} ${email}`);
+                document.getElementById("edit-overlay").classList.remove("active");               
             } else {
                 window.alert(`Error: (${this.status}) ${this.statusTest}`);
             }
@@ -286,8 +289,7 @@ function deleteContact() {
                 console.log(contact);
                 contact.parentNode.removeChild(contact);
                 console.log(contact);
-                document.getElementById("delete-overlay").classList.remove("active");
-                window.alert(`Deleted contact ${contactId}`);
+                document.getElementById("delete-overlay").classList.remove("active");               
             } else {
                 window.alert(`Error: (${this.status}) ${this.statusText}`);
             }

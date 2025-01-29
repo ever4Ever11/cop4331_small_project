@@ -21,9 +21,13 @@ function login() {
             }
             if (this.status == 200) {
                 let response = JSON.parse(this.response);
-                document.cookie = `userId = ${response.id}`;
-                document.cookie = `firstName = ${response.firstName}`;
-                window.location.href = "dashboard.html";
+                if (response.error != "") {
+                    window.alert("A user with this username/password was not found!");
+                } else {
+                    document.cookie = `userId = ${response.id}`;
+                    document.cookie = `firstName = ${response.firstName}`;
+                    window.location.href = "dashboard.html";
+                }
             } else if (this.status == 401) {
                 window.alert("Error: Authentification failed! Correct your username and password.");
             } else {

@@ -54,13 +54,13 @@
 .snowflake:nth-of-type(10){left:90%;-webkit-animation-delay:3s,1.5s;animation-delay:3s,1.5s}
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #c9def0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #c9def0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
 .search-container {
   display: flex;
@@ -69,15 +69,14 @@ body {
   top: 150px;
   left: 500px;
 }
-
 .search-bar {
-    size: 100px;
-    padding: 10px;
-    height: 15px;
-    width: 300px;
-    border: 1px solid #3c5f6c;
-    border-radius: 40px;
-    font-size: 20px;
+  size: 100px;
+  padding: 10px;
+  height: 15px;
+  width: 300px;
+  border: 1px solid #3c5f6c;
+  border-radius: 40px;
+  font-size: 20px;
 }
 #search-icon {
   position: fixed;
@@ -91,13 +90,15 @@ body {
   left: 450px;
   top: 160px;
   font-size: 25px;
-
+}
+#refresh-btn{
+  position: fixed;
+  left: 320px;
+  top: 150px;
 }
 #search-input {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
-
-
 }
 .contacts-container {
   justify-content: center;
@@ -111,77 +112,81 @@ body {
   box-sizing: border-box;
   border-radius: 10px;
   border: 2px solid #222;
-
 }
-
-.contacts-container p {
-    margin-bottom: 20px;
+.contact-container p {
+  position: absolute;
+  top: 250px;
+  left: 645px;
 }
 #Welcome-Username{
-    position: absolute;
-    left: 100px;
-    top: 50px;
-    font-size: 30px;
-    font-family: "Lucida Handwriting", cursive;
-    color:#3c5f6c;
+  position: absolute;
+  left: 100px;
+  top: 50px;
+  font-size: 30px;
+  font-family: "Lucida Handwriting", cursive;
+  color:#3c5f6c;
 }
 #Logout{
-    position: absolute;
-    right: 100px;
-    top: 50px;
+  position: absolute;
+  right: 100px;
+  top: 50px;
 }
 button {
-    outline: none;
-    border: none;
-    background: none;
-    text-transform: uppercase;
-    color: #fcfcfc;
-    background: #3c5f6c;
-    border: 1px solid #3c5f6c;
-    border-radius: 5px;
-    width: 100px;
-    height: 30px;
-    margin: 8px;
-    font-weight: bold;
-    transition: all 0.5s ease;
+  outline: none;
+  border: none;
+  background: none;
+  text-transform: uppercase;
+  color: #fcfcfc;
+  background: #3c5f6c;
+  border: 1px solid #3c5f6c;
+  border-radius: 5px;
+  width: 100px;
+  height: 30px;
+  margin: 8px;
+  font-weight: bold;
+  transition: all 0.5s ease;
 }
 button:hover {
-    cursor: pointer;
-    background: #fcfcfc;
-    color: #3c5f6c;
+  cursor: pointer;
+  background: #fcfcfc;
+  color: #3c5f6c;
 }
-#add-button, #confirm-edit, #confirm-delete{
-    margin-left: 100px;
+#add-button, #confirm-edit{
+  margin-left: 100px;
+}
+#confirm-delete{
+  position: absolute;
+  top: 350px;
+  left: 650px;
 }
 #edit-button, #delete-button{
-    width:20px;
-    height: 20px;
-    background-color:#eef4ed;
-    border:none;
+  width:20px;
+  height: 20px;
+  background-color:#eef4ed;
+  border:none;
 }
 #edit-icon, #delete-icon{
-   font-size: 20px;
-   color:#3c5f6c;
-
+  font-size: 20px;
+  color:#3c5f6c;
 }
 .contacts-table {
-    margin-top: 10px;
-    width: 100%;
-    max-height: 800px;
-    overflow-y: auto;
+  margin-top: 10px;
+  width: 100%;
+  max-height: 800px;
+  overflow-y: auto;
 }
 .contacts-table table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
 }
 .contacts-table th, .contacts-table td {
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
 }
 .contacts-table th {
-    background-color: #fcfcfc;
-    color:#3c5f6c;
+  background-color: #fcfcfc;
+  color:#3c5f6c;
 }
 /*overlay*/
 .overlay {
@@ -239,7 +244,6 @@ label {
   -moz-transition:0.2s ease all;
   -webkit-transition:0.2s ease all;
 }
-
 /* active state */
 input:focus ~ label, input:valid ~ label {
   top:-20px;
@@ -268,11 +272,9 @@ input:focus ~ label, input:valid ~ label {
 .bar:after {
   right:50%;
 }
-
 input:focus ~ .bar:before, input:focus ~ .bar:after {
   width:50%;
 }
-
 .highlight {
   position:absolute;
   height:60%;
@@ -292,25 +294,23 @@ input:focus ~ .highlight {
 
 /* ANIMATIONS  */
 @-webkit-keyframes inputHighlighter {
-    from { background:#3c5f6c; }
+  rom { background:#3c5f6c; }
   to  { width:0; background:transparent; }
 }
 @-moz-keyframes inputHighlighter {
-    from { background:#3c5f6c; }
+  from { background:#3c5f6c; }
   to  { width:0; background:transparent; }
 }
 @keyframes inputHighlighter {
-    from { background:#3c5f6c; }
+  from { background:#3c5f6c; }
   to  { width:0; background:transparent; }
 }
-
 .overlay-icon{
   position: flex;
   margin-left: 250px;
   font-size: 21px;
   cursor: pointer;
 }
-
 .bottom-text {
   margin-top: 10px;
   text-align: center;
@@ -322,7 +322,7 @@ input:focus ~ .highlight {
 .bottom-text a:hover {
   text-decoration: underline;
 }
-
 .buttons {
   display: flex;
 }
+

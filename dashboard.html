@@ -39,6 +39,7 @@
 
     <div class="search-container">
       <div class="buttons">
+        <button class="button" id="refresh-btn" onclick="location.reload();">Refresh</button>
         <i class="fa fa-search" id="search-icon" aria-hidden="true"></i>
         <input class="search-bar" type="text" id="search-input" placeholder=" search your contacts...">
         <button class="button" id="search-btn" onclick="searchContact();">Search</button>
@@ -120,12 +121,12 @@
                 <input type="text" id="edit-firstName" required />
                 <span class="highlight"></span>
                 <span class="bar"></span>
-                <label for="firstName">First name:</label>
+                <label for="firstName">First Name:</label>
                 </div>
                 
                 <div class="contact-input">
                 <input type="text" id="edit-lastName" required />
-                <label for="lastName">Last name:</label>
+                <label for="lastName">Last Name:</label>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 </div>
@@ -156,7 +157,7 @@
             <div class="overlay-icon">
                 <i class="fa fa-times" id="delete-cancel" aria-hidden="true"></i>
             </div>
-            <p>Are You Sure You Want to Delete?</p>
+            <p>Confirm to Delete?</p>
             <!--Delete-->
             <form id="delete-contact-form">
                 <input type="hidden" id="delete-id" />

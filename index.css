@@ -83,9 +83,10 @@ footer {
 }
 
 #noflip-container {
+    margin: 0 auto;
     display: flex;
     width: 450px;
-    height: 500px;
+    height: 400px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -151,4 +152,55 @@ footer {
 .flip .login .fa {
     opacity: 0;
     transition: opacity .2s ease-in-out;
+}
+/*password validation*/
+/* The message box */
+#password-message {
+    display: none;
+    background: #eef4ed;
+    border-radius: 10px;
+    border: 2px solid #222;
+    color: #000;
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+#password-message h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    margin-top: 0;
+    text-transform: uppercase;
+}
+
+#password-message p {
+    margin: 5px 0;
+}
+.valid {
+    color: green;
+}
+
+.valid:before {
+    position: relative;
+    left: -10px;
+    content: "✔";
+}
+
+.invalid {
+    color: red;
+}
+
+.invalid:before {
+    position: relative;
+    left: -10px;
+    content: "✖";
+}
+
+/* Error message style */
+.error-msg {
+    font-family: Arial, Helvetica, sans-serif;
+    color: red;
+    font-size: 10px;
+    margin-top: 4px;
 }

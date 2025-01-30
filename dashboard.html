@@ -3,9 +3,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contacts dashboard web page.">
     <title>Contacts-Dashboard</title>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family">
     <!--fa class styles defined here-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="dashboard.css">
@@ -17,7 +18,7 @@
 <body onload="populateContacts()">
     <header>
         <div id="Welcome-Username">
-            <p>Welcome, <span id="username"></span></p>
+            <p><span id="username"></span>, welcome to your contact manager</p>
         </div>
         <div id="Logout">
             <button type="button"  onclick="logout();">Logout</button>
@@ -102,7 +103,7 @@
                   <span class="bar"></span>
                   <label for="add-email">Email</label>
                 </div>
-                <button class="button" id="add-button" onclick="addContact();">Add</button>
+                <button class="button" id="confirm-add" onclick="addContact();">Add</button>
             </form>
         </div>
     </div>

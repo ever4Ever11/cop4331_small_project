@@ -8,20 +8,24 @@
   0% {top:-10%}
   100% {top:100%}
 }
+
 @keyframes snow-fall {
   0% {top:-10%}
   100% {top:100%}
 }
+
 @-webkit-keyframes snow-shake {
   0% {transform:translateX(0px)}
   50%{transform:translateX(60px)}
   100%{transform:translateX(0px)}
 }
+
 @keyframes snow-shake {
   0% {transform:translateX(0px)}
   50%{transform:translateX(60px)}
   100%{transform:translateX(0px)}
 }
+
 .snowflake {
   position:fixed;
   top:-10%;
@@ -42,6 +46,7 @@
   animation-iteration-count:infinite,infinite;
   animation-play-state:running,running;
 }
+
 .snowflake:nth-of-type(1){left:1%;-webkit-animation-delay:0s,0s;animation-delay:0s,0s}
 .snowflake:nth-of-type(2){left:10%;-webkit-animation-delay:3s,3s;animation-delay:3s,3s}
 .snowflake:nth-of-type(3){left:20%;-webkit-animation-delay:7s,.6s;animation-delay:7s,.6s}
@@ -53,22 +58,48 @@
 .snowflake:nth-of-type(9){left:80%;-webkit-animation-delay:1s,0s;animation-delay:1s,0s}
 .snowflake:nth-of-type(10){left:90%;-webkit-animation-delay:3s,1.5s;animation-delay:3s,1.5s}
 
+html {
+  position: relative;
+  background-image:url('background2.jpg');
+  background-size: 100% 100vh;
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
+}
+
 body {
   font-family: Arial, sans-serif;
-  background-color: #c9def0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
 }
+
+header {
+  display: flex;
+  align-items: center;
+  color: black;
+  padding: 20px;
+}
+
+#Welcome-Username{
+  font-size: 30px;
+  font-family: "Lucida Handwriting", cursive;
+}
+
+
+#Logout {
+  margin-left: auto;
+}
+
 .search-container {
   display: flex;
+  align-items: center;
   justify-content: center;
-  position: fixed;
-  top: 150px;
-  left: 500px;
+  padding: 20px;
 }
+
+#search-icon {
+  font-size: 1.0em;
+}
+
 .search-bar {
   size: 100px;
   padding: 10px;
@@ -76,35 +107,13 @@ body {
   width: 300px;
   border: 1px solid #3c5f6c;
   border-radius: 40px;
-  font-size: 20px;
-}
-#search-icon {
-  position: fixed;
-  left: 450px;
-  top: 160px;
-  font-size: 25px;
-
-}
-#search-icon {
-  position: fixed;
-  left: 450px;
-  top: 160px;
-  font-size: 25px;
-}
-#refresh-btn{
-  position: fixed;
-  left: 320px;
-  top: 150px;
-}
-#search-input {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
 }
+
 .contacts-container {
+  margin: auto;
   justify-content: center;
-  position: fixed;
-  left: 200px;
-  top: 220px;
   width: 100%;
   max-width: 1000px;
   background: #eef4ed;
@@ -113,24 +122,11 @@ body {
   border-radius: 10px;
   border: 2px solid #222;
 }
+
 .contact-container p {
-  position: absolute;
-  top: 250px;
-  left: 645px;
+  text-align: center;
 }
-#Welcome-Username{
-  position: absolute;
-  left: 100px;
-  top: 50px;
-  font-size: 30px;
-  font-family: "Lucida Handwriting", cursive;
-  color:#3c5f6c;
-}
-#Logout{
-  position: absolute;
-  right: 100px;
-  top: 50px;
-}
+
 button {
   outline: none;
   border: none;
@@ -142,22 +138,22 @@ button {
   border-radius: 5px;
   width: 100px;
   height: 30px;
-  margin: 8px;
+  margin: 10px;
   font-weight: bold;
   transition: all 0.5s ease;
 }
+
 button:hover {
   cursor: pointer;
   background: #fcfcfc;
   color: #3c5f6c;
 }
-#add-button, #confirm-edit{
+#confirm-add, #confirm-edit{
   margin-left: 100px;
 }
 #confirm-delete{
-  position: absolute;
-  top: 350px;
-  left: 650px;
+  margin-left: 100px;
+  margin-top: 100px;
 }
 #edit-button, #delete-button{
   width:20px;
@@ -325,4 +321,3 @@ input:focus ~ .highlight {
 .buttons {
   display: flex;
 }
-

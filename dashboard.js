@@ -122,10 +122,10 @@ function displayContacts(contactList) {
 
         let actions = document.createElement("td");
         actions.innerHTML = `
-            <button class="button" id="edit-button" onclick="activateEdit(${contact.id})">
+            <button class="button" id="edit-button" aria-label="edit button" onclick="activateEdit(${contact.id})">
             <i class="fa fa-edit" id="edit-icon" aria-hidden="true"></i>
             </button>
-            <button class="button" id="delete-button" onclick="activateDelete(${contact.id})">
+            <button class="button" id="delete-button" aria-label="delete button" onclick="activateDelete(${contact.id})">
             <i class="fa fa-trash" id="delete-icon" aria-hidden="true"></i>
             </button>
         `;

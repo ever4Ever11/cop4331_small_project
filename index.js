@@ -22,7 +22,7 @@ function login() {
             if (this.status == 200) {
                 let response = JSON.parse(this.response);
                 if (response.error != "") {
-                    window.alert("A user with this username/password was not found!");
+                    window.alert("😭 A user with this username/password was not found! \n Please correct your username/password.");
                 } else {
                     document.cookie = `userId = ${response.id}`;
                     document.cookie = `firstName = ${response.firstName}`;

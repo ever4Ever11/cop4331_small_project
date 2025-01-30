@@ -88,7 +88,7 @@
                        placeholder="Password"
                        id="registerPasswordInput"
                        minlength=8
-                       pattern="[A-Za-z0-9!@#$%^&*]+"
+                       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d$]{8,}$"
                        maxlength=25
                        required />
             </div>

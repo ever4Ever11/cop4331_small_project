@@ -37,24 +37,25 @@ passwordInput.onkeyup = function () {
         passwordMessageItems[0].classList.remove("valid");
         passwordMessageItems[0].classList.add("invalid");
     }
-// checking the number
-let numbersRegex = /[0-9]/g;
-if (passwordInput.value.match(numbersRegex)) {
-    passwordMessageItems[2].classList.remove("invalid");
-    passwordMessageItems[2].classList.add("valid");
-} else {
-    passwordMessageItems[2].classList.remove("valid");
-    passwordMessageItems[2].classList.add("invalid");
-}
 
-// Checking length of the password
-if (passwordInput.value.length >= 8) {
-    passwordMessageItems[3].classList.remove("invalid");
-    passwordMessageItems[3].classList.add("valid");
-} else {
-    passwordMessageItems[3].classList.remove("valid");
-    passwordMessageItems[3].classList.add("invalid");
-}
+    // checking the number
+    let numbersRegex = /[0-9]/g;
+    if (passwordInput.value.match(numbersRegex)) {
+        passwordMessageItems[2].classList.remove("invalid");
+        passwordMessageItems[2].classList.add("valid");
+    } else {
+        passwordMessageItems[2].classList.remove("valid");
+        passwordMessageItems[2].classList.add("invalid");
+    }
+
+    // Checking length of the password
+    if (passwordInput.value.length >= 8) {
+        passwordMessageItems[3].classList.remove("invalid");
+        passwordMessageItems[3].classList.add("valid");
+    } else {
+        passwordMessageItems[3].classList.remove("valid");
+        passwordMessageItems[3].classList.add("invalid");
+    }
 }
 
 

@@ -91,19 +91,19 @@
                 </div>
 
                  <div class="contact-input">
-                  <input type="text" id="add-phone" required>
+                  <input type="tel " id="add-phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required />
                   <span class="highlight"></span>
                   <span class="bar"></span>
-                  <label for="add-phone">Phone</label>
+                  <label for="add-phone"> Phone (xxx-xxx-xxxx)</label>
                 </div>
 
                  <div class="contact-input">
-                  <input type="text" id="add-email" required>
+                  <input type="email" id="add-email" pattern="[A-Za-z0-9]+@[A-Za-z0-9]+\.[a-z]+" required />
                   <span class="highlight"></span>
                   <span class="bar"></span>
-                  <label for="add-email">Email</label>
+                  <label for="add-email">Email (name@example.com)</label>
                 </div>
-                <button class="button" id="confirm-add" onclick="addContact();">Add</button>
+                <button class="button" id="confirm-add" onclick="if(this.form.reportValidity()){addContact()}">Add</button>
             </form>
         </div>
     </div>
@@ -122,31 +122,31 @@
                 <input type="text" id="edit-firstName" required />
                 <span class="highlight"></span>
                 <span class="bar"></span>
-                <label for="firstName">First Name:</label>
+                <label for="firstName">First Name</label>
                 </div>
                 
                 <div class="contact-input">
                 <input type="text" id="edit-lastName" required />
-                <label for="lastName">Last Name:</label>
+                <label for="lastName">Last Name</label>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 </div>
 
                 <div class="contact-input">
-                <input type="tel" id="edit-phone" required />
-                <label for="phone">Phone:</label>
+                <input type="tel" id="edit-phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required />
+                <label for="phone">Phone (xxx-xxx-xxxx)</label>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 </div>
 
                 <div class="contact-input">
-                <input type="email" id="edit-email" required />
-                <label for="email">Email:</label>
+                <input type="email" id="edit-email" pattern="[A-Za-z0-9]+@[A-Za-z0-9]+\.[a-z]+" required />
+                <label for="email">Email (name@example.com)</label>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 </div>
 
-                <button class="button" id="confirm-edit" onclick="editContact();">Save</button>
+                <button class="button" id="confirm-edit" onclick="if(this.form.reportValidity()){editContact()}">Save</button>
             </form>
         </div>
     </div>

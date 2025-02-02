@@ -3,9 +3,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="register and login web page.">
     <title>Login-Signup</title>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family">
     <!--fa class styles defined here-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="index.css">
@@ -25,7 +26,7 @@
     <div class="noflip" id="noflip-container" >
 
         <form class="login front">
-            <h1>Contact Manager</h1>
+            <h1>ConnectFor ❆</h1>
             <div>
                 <i class="fa fa-user" aria-hidden="true"></i>
                 <input type="text"
@@ -85,10 +86,9 @@
                 <i class="fa fa-lock" aria-hidden="true"></i>
                 <input type="password" 
                        placeholder="Password"
-                       type="password"
                        id="registerPasswordInput"
                        minlength=8
-                       pattern="[A-Za-z0-9!@#$%^&*]+"
+                       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d$]{8,}$"
                        maxlength=25
                        required />
             </div>
@@ -98,10 +98,25 @@
             </div>
         </form>
     </div>
+    <div id="password-message">
+        <h3>Password must contain:</h3>
+        <p class="password-message-item invalid">At least
+            <b>one lowercase letter</b>
+        </p>
+        <p class="password-message-item invalid">At least
+            <b>one uppercase letter</b>
+        </p>
+        <p class="password-message-item invalid">At least
+            <b>one number</b>
+        </p>
+        <p class="password-message-item invalid">Minimum
+            <b>8 characters</b>
+        </p>
+    </div>
     </main>
 
     <footer>
-        COP4331 - Spring2025 - team28
+        Cop4331 - Spring2025 - Team28
     </footer>
 </body>
 </html>

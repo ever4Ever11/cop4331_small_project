@@ -1,0 +1,292 @@
+swagger: "2.0"
+info:
+  description: API documentation for the COP 4331 Contact Manager App.
+  version: 1.0.0
+  title: ConnectFor
+  contact:
+    email: yo881251@ucf.edu
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+paths:
+  /login.php:
+    post:
+      tags:
+        - Users
+      summary: User login
+      operationId: loginUser
+      description: approves an user with login credentials and returns user details if successful.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: loginItem
+          description: User login credentials.
+          required: true
+          schema:
+            $ref: "#/definitions/login"
+      responses:
+        200:
+          description: Login successful
+        404:
+          description: URL Not Found
+        500:
+          description: Server Error
+
+  /register.php:
+    post:
+      tags:
+        - Users
+      summary: Registers a new user
+      operationId: registerUser
+      description: Registers a new user in the database if the login is not already taken.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: userItem
+          description: User registration details.
+          required: true
+          schema:
+            $ref: "#/definitions/register"
+      responses:
+        200:
+          description: User registered successfully
+        409:
+          description: Conflict - User login already exists
+        500:
+          description: Server Error
+
+  /add-contact.php:
+    post:
+      tags:
+      - Contacts
+      summary: Adds a contact
+      operationId: addContact
+      description: Adds a contact to the database for the specified user.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: contactItem
+        description: Contact details to be added.
+        required: true
+        schema:
+          $ref: '#/definitions/add-contact'
+      responses:
+        200:
+          description: Contact added successfully
+        500:
+          description: Server Error
+
+  /delete-contact.php:
+    delete:
+      tags:
+      - Contacts
+      summary: Deletes a contact
+      operationId: deleteContact
+      description: Deletes a contact from the database using the contact's ID.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: contactId
+        description: The ID of the contact to be deleted.
+        required: true
+        schema:
+          $ref: '#/definitions/delete-contact'
+      responses:
+        200:
+          description: Contact deleted successfully
+        404:
+          description: Contact not found
+        500:
+          description: Server Error
+
+  /edit-contact.php:
+    put:
+      tags:
+      - Contacts
+      summary: Updates a contact
+      operationId: updateContact
+      description: Updates an existing contact in the database using the contact's ID.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: contactItem
+        description: Contact details to be updated.
+        required: true
+        schema:
+          $ref: '#/definitions/edit-contact'
+      responses:
+        200:
+          description: Contact updated successfully
+        404:
+          description: Contact not found
+        500:
+          description: Server Error
+
+  /search-contacts.php:
+    post:
+      tags:
+      - Contacts
+      summary: Searches for contacts
+      operationId: searchContacts
+      description: Searches for contacts by name for a specific user.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: searchItem
+        description: Contact search parameters.
+        required: true
+        schema:
+          $ref: '#/definitions/search-contacts'
+      responses:
+        200:
+          description: Search successful
+          schema:
+            type: object
+            properties:
+              results:
+                type: array
+                items:
+                  $ref: '#/definitions/search-contacts'
+              error:
+                type: string
+                example: ""
+        404:
+          description: No records found
+        500:
+          description: Server Error
+
+definitions:
+  login:
+    type: object
+    required:
+      - login
+      - password
+    properties:
+      login:
+        type: string
+        example: "john"
+      password:
+        type: string
+        example: "password"
+
+  register:
+    type: object
+    required:
+      - login
+      - password
+      - firstname
+      - lastname
+    properties:
+      login:
+        type: string
+        example: "johndoe"
+      password:
+        type: string
+        example: "password"
+      firstname:
+        type: string
+        example: "John"
+      lastname:
+        type: string
+        example: "Doe"
+
+  add-contact:
+    type: object
+    required:
+    - firstName
+    - lastName
+    - email
+    - phone
+    - userId
+    properties:
+      id:
+        type: integer
+        example: 42
+      firstName:
+        type: string
+        example: "John"
+      lastName:
+        type: string
+        example: "Doe"
+      email:
+        type: string
+        format: email
+        example: "john.doe@example.com"
+      phone:
+        type: string
+        example: "555-1234"
+      userId:
+        type: integer
+        example: 1
+
+  delete-contact:
+    type: object
+    required:
+    - ID
+    properties:
+      ID:
+        type: integer
+        example: 42
+
+  edit-contact:
+    type: object
+    required:
+    - ID
+    - FirstName
+    - LastName
+    - Phone
+    - Email
+    properties:
+      ID:
+        type: integer
+        example: 42
+      FirstName:
+        type: string
+        example: "John"
+      LastName:
+        type: string
+        example: "Doe"
+      Phone:
+        type: string
+        example: "555-1234"
+      Email:
+        type: string
+        format: email
+        example: "john.doe@example.com"
+
+  search-contacts:
+    type: object
+    required:
+    - search
+    - userId
+    properties:
+      search:
+        type: string
+        example: "John"
+      userId:
+        type: integer
+        example: 1
+
+host: coolestdomain.xyz
+basePath: /LAMPAPI
+schemes:
+  - http

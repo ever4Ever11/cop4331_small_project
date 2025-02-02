@@ -5,15 +5,24 @@ body {
     height: 100%;
     align-items: center;
     justify-content: center;
-    color: 080f0f;
-    background: #c9def0;
+    color: white;
+}
+
+html {
+    position: relative;
+    background-image:url('background1.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100vh;
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
 }
 
 h1 {
-    text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 30px;
-    color: #3c5f6c;
+    color: black;
 }
 
 input {
@@ -25,7 +34,7 @@ input {
     outline: none;
     border: none;
     background: none;
-    color: #999;
+    color: black;
     border-bottom: 1px solid #444;
 }
 
@@ -53,29 +62,32 @@ button:hover {
 
 footer {
     position: absolute;
-    bottom: 40px;
+    bottom: 0;
+    text-align: center;
     font-family: Arial, Helvetica, sans-serif;
-    color: #3c5f6c;
-}
+    color:black;
+  }
 
 #git-icon {
     position: absolute;
-    left: 100px;
-    top: 50px;
+    left: 150px;
+    top: 80px;
     font-size: 50px;
     color:#222;
 }
 
 .fa {
+    color: black;
     position: relative;
     right: -35px;
     transition: opacity 2s ease-in-out;
 }
 
 #noflip-container {
+    margin: 0 auto;
     display: flex;
     width: 450px;
-    height: 500px;
+    height: 400px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -126,7 +138,7 @@ footer {
 
 .links a {
     text-decoration: none;
-    color: #3c5f6c;
+    color: black;
     padding: 5px;
 }
 
@@ -141,4 +153,55 @@ footer {
 .flip .login .fa {
     opacity: 0;
     transition: opacity .2s ease-in-out;
+}
+/*password validation*/
+/* The message box */
+#password-message {
+    display: none;
+    background: #eef4ed;
+    border-radius: 10px;
+    border: 2px solid #222;
+    color: #000;
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+#password-message h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    margin-top: 0;
+    text-transform: uppercase;
+}
+
+#password-message p {
+    margin: 5px 0;
+}
+.valid {
+    color: green;
+}
+
+.valid:before {
+    position: relative;
+    left: -10px;
+    content: "✔";
+}
+
+.invalid {
+    color: red;
+}
+
+.invalid:before {
+    position: relative;
+    left: -10px;
+    content: "✖";
+}
+
+/* Error message style */
+.error-msg {
+    font-family: Arial, Helvetica, sans-serif;
+    color: red;
+    font-size: 10px;
+    margin-top: 4px;
 }

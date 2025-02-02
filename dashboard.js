@@ -190,7 +190,8 @@ function addContact() {
                 lastNameE.className = "last-name";
 
                 let phoneE = document.createElement("td");
-                phoneE.innerHTML = phone;
+                phone = phone.replace(/[^0-9]/g, "");
+                phoneE.innerHTML = phone.substring(0, 3) + "-" + phone.substring(3, 6) + "-" + phone.substring(6);
                 phoneE.className = "phone";
 
                 let emailE = document.createElement("td");
@@ -256,7 +257,8 @@ function editContact() {
                 let contact = document.getElementById(`contact-${contactId}`);
                 contact.getElementsByClassName("first-name")[0].innerHTML = firstName;
                 contact.getElementsByClassName("last-name")[0].innerHTML = lastName;
-                contact.getElementsByClassName("phone")[0].innerHTML = phone;
+                phone = phone.replace(/[^0-9]/g, "");
+                contact.getElementsByClassName("phone")[0].innerHTML = phone.substring(0, 3) + "-" + phone.substring(3, 6) + "-" + phone.substring(6);
                 contact.getElementsByClassName("email")[0].innerHTML = email;
 
                 document.getElementById("edit-overlay").classList.remove("active");               

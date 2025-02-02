@@ -43,7 +43,7 @@
         <button class="button" id="refresh-btn" onclick="location.reload();">Refresh</button>
         <i class="fa fa-search" id="search-icon" aria-hidden="true"></i>
         <input class="search-bar" type="text" id="search-input" placeholder=" search your contacts...">
-        <button class="button" id="search-btn" onclick="searchContact();">Search</button>
+        <button class="button" id="search-btn" onclick="searchContact(1);">Search</button>
         <button class="button" id="add-overlay-btn">Add</button>
       </div>
     </div>
@@ -65,6 +65,17 @@
                     <!--Display all the contacts-->
                 </tbody>
             </table>
+        </div>
+        <div id="page-controls">
+            <button class="button" id="prev-page-button" aria-label="previous page" disabled onclick="prevPage();">
+                <i class="fa fa-angle-left" id="prev-page-icon" aria-hidden="true"></i>
+                Previous
+            </button>
+            <p>Page <span id="curr-page">1</span> of <span id="total-pages">0</span></p>
+            <button class="button" id="next-page-button" aria-label="next page" disabled onclick="nextPage();">
+                Next
+                <i class="fa fa-angle-right" id="next-page-icon" aria-hidden="true"></i>
+            </button>
         </div>
     </div>
 

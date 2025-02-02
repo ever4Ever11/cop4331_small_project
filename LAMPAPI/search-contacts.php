@@ -2,7 +2,10 @@
 
 	$inData = getRequestInfo();
 	
-	$searchResults = [];
+	$searchResults = [
+		"contacts" => [],
+		"pageCount" => 0
+	];
 	$searchCount = 0;
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
@@ -12,35 +15,41 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("SELECT ID, FirstName, LastName, Phone, Email FROM Contacts WHERE CONCAT_WS(' ', FirstName, LastName) LIKE ? AND UserID=?");
 		$contactName = "%" . $inData["search"] . "%";
-		$stmt->bind_param("ss", $contactName, $inData["userId"]);
-		$stmt->execute();
-		
-		$result = $stmt->get_result();
-		
-		while($row = $result->fetch_assoc())
-		{
-			$searchCount++;
-			$searchResults[] = [
-				"id" => $row["ID"],
-				"firstName" => $row["FirstName"],
-				"lastName" => $row["LastName"],
-				"phone" => $row["Phone"],
-				"email" => $row["Email"]
-			];
-		}
-		
-		if( $searchCount == 0 )
-		{
+
+		$count = $conn->prepare("SELECT COUNT(*) FROM Contacts WHERE CONCAT_WS(' ', FirstName, LastName) LIKE ? AND UserID=?");
+		$count->bind_param("ss", $contactName, $inData["userId"]);
+		$count->execute();
+
+		if($row = $count->get_result()->fetch_assoc()) {
+			$searchCount = $row["COUNT(*)"];
+
+			$stmt = $conn->prepare("SELECT ID, FirstName, LastName, Phone, Email FROM Contacts WHERE CONCAT_WS(' ', FirstName, LastName) LIKE ? AND UserID=? LIMIT ?, 10");
+			$offset = 10*($inData["page"] - 1);
+			$stmt->bind_param("ssi", $contactName, $inData["userId"], $offset);
+			$stmt->execute();
+			
+			$result = $stmt->get_result();
+			
+			while($row = $result->fetch_assoc())
+			{
+				$searchResults["contacts"][] = [
+					"id" => $row["ID"],
+					"firstName" => $row["FirstName"],
+					"lastName" => $row["LastName"],
+					"phone" => $row["Phone"],
+					"email" => $row["Email"]
+				];
+			}
+			
+			$searchResults["pageCount"] = ceil($searchCount/10);
+			returnWithInfo( json_encode($searchResults) );
+			$stmt->close();
+		} else {
 			returnWithError( "No Records Found" );
 		}
-		else
-		{
-			returnWithInfo( json_encode($searchResults) );
-		}
 		
-		$stmt->close();
+		$count->close();
 		$conn->close();
 	}
 

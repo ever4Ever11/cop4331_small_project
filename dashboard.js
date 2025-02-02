@@ -50,7 +50,8 @@ function populateContacts() {
     try {
         payload = JSON.stringify({
             search: '',
-            userId: getCookie("userId")
+            userId: getCookie("userId"),
+            page: 1
         });
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "LAMPAPI/search-contacts.php", true);
@@ -59,7 +60,7 @@ function populateContacts() {
             if (this.readyState != XMLHttpRequest.DONE) {
                 return;
             } else if (this.status == 200) {
-                displayContacts(JSON.parse(this.response).results);
+                displayContacts(1, JSON.parse(this.response).results);
             } else {
                 window.alert(`Error: (${this.status}) ${this.statusText}`);
             }
@@ -70,13 +71,14 @@ function populateContacts() {
     }
 }
 
-function searchContact() {
+function searchContact(page) {
     let search = document.getElementById("search-input").value;
     
     try {
         payload = JSON.stringify({
             search: search,
-            userId: getCookie("userId")
+            userId: getCookie("userId"),
+            page: page
         });
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "LAMPAPI/search-contacts.php", true);
@@ -85,7 +87,7 @@ function searchContact() {
             if (this.readyState != XMLHttpRequest.DONE) {
                 return;
             } else if (this.status == 200) {
-                displayContacts(JSON.parse(this.response).results);
+                displayContacts(page, JSON.parse(this.response).results);
             } else {
                 window.alert(`Error: (${this.status}) ${this.statusText}`);
             }
@@ -96,7 +98,32 @@ function searchContact() {
     }
 }
 
-function displayContacts(contactList) {
+function prevPage() {
+    searchContact(parseInt(document.getElementById("curr-page").textContent) - 1);
+}
+function nextPage() {
+    searchContact(parseInt(document.getElementById("curr-page").textContent) + 1);
+}
+
+function displayContacts(page, contactResults) {
+    let prevButton = document.getElementById("prev-page-button");
+    let nextButton = document.getElementById("next-page-button");
+    if (page > 1) {
+        prevButton.removeAttribute("disabled");
+    } else {
+        prevButton.setAttribute("disabled", "true");
+    }
+    if (page < contactResults.pageCount) {
+        nextButton.removeAttribute("disabled");
+    } else {
+        nextButton.setAttribute("disabled", "true");
+    }
+
+    document.getElementById("curr-page").innerHTML = page;
+    document.getElementById("total-pages").innerHTML = contactResults.pageCount;
+
+    let contactList = contactResults.contacts;
+
     let table = document.getElementById("contacts-table-tbody");
     table.innerHTML = "";
     for (let i = 0; i < contactList.length; i++) {
@@ -174,49 +201,9 @@ function addContact() {
                 return;
             }
             if (this.status == 200) {
-                let contact_id = JSON.parse(this.response).id;
-
-                let table = document.getElementById("contacts-table-tbody");
-
-                let row = document.createElement("tr");
-                row.setAttribute("id", `contact-${contact_id}`);
-
-                let firstNameE = document.createElement("td");
-                firstNameE.innerHTML = firstName;
-                firstNameE.className = "first-name";
-
-                let lastNameE = document.createElement("td");
-                lastNameE.innerHTML = lastName;
-                lastNameE.className = "last-name";
-
-                let phoneE = document.createElement("td");
-                phone = phone.replace(/[^0-9]/g, "");
-                phoneE.innerHTML = phone.substring(0, 3) + "-" + phone.substring(3, 6) + "-" + phone.substring(6);
-                phoneE.className = "phone";
-
-                let emailE = document.createElement("td");
-                emailE.innerHTML = email;
-                emailE.className = "email";
-
-                let actions = document.createElement("td");
-                actions.innerHTML = `
-                    <button class="button" id="edit-button" onclick="activateEdit(${contact_id})">
-                    <i class="fa fa-edit" id="edit-icon" aria-hidden="true"></i>
-                    </button>
-                    <button class="button" id="delete-button" onclick="activateDelete(${contact_id})">
-                    <i class="fa fa-trash" id="delete-icon" aria-hidden="true"></i>
-                    </button>
-                `;
-
-                row.appendChild(firstNameE);
-                row.appendChild(lastNameE);
-                row.appendChild(phoneE);
-                row.appendChild(emailE);
-                row.appendChild(actions);
-                table.appendChild(row);
+                searchContact(parseInt(document.getElementById("curr-page").textContent));
 
                 document.getElementById("add-overlay").classList.remove("active");
-                
                 document.getElementById("add-firstName").value = "";
                 lastName = document.getElementById("add-lastName").value = "";
                 phone = document.getElementById("add-phone").value = "";
@@ -254,13 +241,7 @@ function editContact() {
                 return;
             }
             if (this.status == 200) {
-                let contact = document.getElementById(`contact-${contactId}`);
-                contact.getElementsByClassName("first-name")[0].innerHTML = firstName;
-                contact.getElementsByClassName("last-name")[0].innerHTML = lastName;
-                phone = phone.replace(/[^0-9]/g, "");
-                contact.getElementsByClassName("phone")[0].innerHTML = phone.substring(0, 3) + "-" + phone.substring(3, 6) + "-" + phone.substring(6);
-                contact.getElementsByClassName("email")[0].innerHTML = email;
-
+                searchContact(parseInt(document.getElementById("curr-page").textContent));
                 document.getElementById("edit-overlay").classList.remove("active");               
             } else {
                 window.alert(`Error: (${this.status}) ${this.statusTest}`);
@@ -287,10 +268,7 @@ function deleteContact() {
                 return;
             }
             if (this.status == 200) {
-                let contact = document.getElementById(`contact-${contactId}`);
-                console.log(contact);
-                contact.parentNode.removeChild(contact);
-                console.log(contact);
+                searchContact(Math.min(parseInt(document.getElementById("curr-page").textContent), parseInt(document.getElementById("total-pages").textContent)));
                 document.getElementById("delete-overlay").classList.remove("active");               
             } else {
                 window.alert(`Error: (${this.status}) ${this.statusText}`);

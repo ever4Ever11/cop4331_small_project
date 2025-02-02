@@ -4,7 +4,7 @@
 	$firstName = $inData["firstName"];
 	$lastName = $inData["lastName"];
 	$email = $inData["email"];
-	$phone = $inData["phone"];
+	$phone = formatPhone($inData["phone"]);
 	$userId = $inData["userId"];
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
@@ -17,9 +17,9 @@
 		$stmt = $conn->prepare("INSERT into Contacts (FirstName,LastName,Phone,Email,UserID) VALUES(?,?,?,?,?)");
 		$stmt->bind_param("sssss", $firstName, $lastName, $phone, $email, $userId);
 		$stmt->execute();
-		returnWithInfo( $stmt->insert_id );
 		$stmt->close();
 		$conn->close();
+		returnWithError("");
 	}
 
 	function getRequestInfo()
@@ -38,11 +38,17 @@
 		$retValue = '{"error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
-
-	function returnWithInfo( $id )
-	{
-		$retValue = '{"id":' . $id . ',"error":""}';
-		sendResultInfoAsJson( $retValue );
-	}
 	
+	function formatPhone($phone){
+		// Remove non-numeric characters
+		$phone = preg_replace('/[^0-9]/', '', $phone);
+
+		// Validate the phone number length
+		if (strlen($phone) != 10) {
+			return "Invalid phone number";
+		}
+
+		// Phone number formatting
+		return substr($phone, 0, 3) . '-' . substr($phone, 3, 3) . '-' . substr($phone, 6);
+	}
 ?>

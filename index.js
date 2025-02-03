@@ -113,7 +113,9 @@ function register() {
                 return;
             }
             if (this.status == 200) {
-                 window.alert("You have successful registered!");
+                document.getElementById("loginUsernameInput").value = username;
+                document.getElementById("loginPasswordInput").value = password;
+                login();
             } else if (this.status == 409) {
                 window.alert("Error: Username already taken.");
              } else {

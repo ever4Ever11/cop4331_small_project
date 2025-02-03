@@ -267,7 +267,7 @@ definitions:
         example: "Doe"
       Phone:
         type: string
-        example: "555-1234"
+        example: "987-555-1234"
       Email:
         type: string
         format: email
@@ -278,11 +278,15 @@ definitions:
     required:
     - search
     - userId
+    - pageNum
     properties:
       search:
         type: string
         example: "John"
       userId:
+        type: integer
+        example: 1
+      pageNum:
         type: integer
         example: 1
 

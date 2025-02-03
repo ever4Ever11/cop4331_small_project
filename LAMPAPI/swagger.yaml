@@ -141,21 +141,21 @@ paths:
   /search-contacts.php:
     post:
       tags:
-      - Contacts
+        - Contacts
       summary: Searches for contacts
       operationId: searchContacts
-      description: Searches for contacts by name for a specific user.
+      description: Searches for contacts by name for a specific user, supports pagination.
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       parameters:
-      - in: body
-        name: searchItem
-        description: Contact search parameters.
-        required: true
-        schema:
-          $ref: '#/definitions/search-contacts'
+        - in: body
+          name: searchItem
+          description: Contact search parameters.
+          required: true
+          schema:
+            $ref: '#/definitions/search-contacts'
       responses:
         200:
           description: Search successful
@@ -163,9 +163,31 @@ paths:
             type: object
             properties:
               results:
-                type: array
-                items:
-                  $ref: '#/definitions/search-contacts'
+                type: object
+                properties:
+                  contacts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 42
+                        firstName:
+                          type: string
+                          example: "John"
+                        lastName:
+                          type: string
+                          example: "Doe"
+                        phone:
+                          type: string
+                          example: "555-1234"
+                        email:
+                          type: string
+                          example: "john.doe@example.com"
+                  pageCount:
+                    type: integer
+                    example: 2
               error:
                 type: string
                 example: ""
@@ -267,7 +289,7 @@ definitions:
         example: "Doe"
       Phone:
         type: string
-        example: "987-555-1234"
+        example: "555-1234"
       Email:
         type: string
         format: email
@@ -276,9 +298,9 @@ definitions:
   search-contacts:
     type: object
     required:
-    - search
-    - userId
-    - pageNum
+      - search
+      - userId
+      - page
     properties:
       search:
         type: string
@@ -286,7 +308,7 @@ definitions:
       userId:
         type: integer
         example: 1
-      pageNum:
+      page:
         type: integer
         example: 1
 
